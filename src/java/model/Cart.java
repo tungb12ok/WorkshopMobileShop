@@ -32,4 +32,13 @@ public class Cart {
         }
         return 0;
     }
+
+    public void removeItem(User user, String mobileId) {
+        String userId = user.getUserId();
+        Map<String, Integer> userCart = items.get(userId);
+        if (userCart != null) {
+            userCart.remove(mobileId);
+        }
+    }
+
 }

@@ -23,12 +23,29 @@
             <c:if test="${mess != null}">
                 <p class="text-success">${mess}</p>
             </c:if>
-            
+
             <c:if test="${user != null}">
                 <h2>Mobile List</h2>
                 <c:if test="${user.role eq 1}">
                     <a href="CreateController" class="btn btn-success">Create Mobile</a>
                 </c:if>
+                <h1>Search Mobiles</h1>
+                <form action="search" method="get">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <label for="minPrice" class="form-label">Minimum Price:</label>
+                            <input type="number" class="form-control" id="minPrice" name="minPrice" value="${minPrice}" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="maxPrice" class="form-label">Maximum Price:</label>
+                            <input type="number" class="form-control" id="maxPrice" name="maxPrice" value="${maxPrice}" required>
+                        </div>
+                        <div class="col-md-3">
+                            <hr>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
                 <c:if test="${user.role eq 0}">
                     <a href="ViewCart" class="btn btn-info">View Cart</a>
                 </c:if>

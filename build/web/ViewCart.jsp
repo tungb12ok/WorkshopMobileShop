@@ -21,6 +21,7 @@
                         <tr>
                             <th>Mobile ID</th>
                             <th>Quantity</th>
+                            <th>Remove</th> <!-- Add a column for remove button/link -->
                         </tr>
                     </thead>
                     <tbody>
@@ -30,6 +31,13 @@
                                     <tr>
                                         <td>${entry.key}</td>
                                         <td>${entry.value}</td>
+                                        <td>
+                                            <!-- Add a remove button/link -->
+                                            <form action="RemoveFromCartController" method="post">
+                                                <input type="hidden" name="mobileId" value="${entry.key}">
+                                                <button type="submit" class="btn btn-danger">Remove</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

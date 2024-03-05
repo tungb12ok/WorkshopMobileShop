@@ -68,6 +68,39 @@ public class MobileDAO extends DBContext {
             e.printStackTrace();
         }
     }
+// Inside MobileDAO class
+
+    public List<Mobile> getMobilesByPriceRange(double minPrice, double maxPrice) {
+        List<Mobile> mobiles = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM Mobiles WHERE price BETWEEN ? AND ?";
+            try ( PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setDouble(1, minPrice);
+                preparedStatement.setDouble(2, maxPrice);
+
+                ResultSet resultSet = preparedStatement.executeQuery();
+
+                while (resultSet.next()) {
+                    Mobile mobile = new Mobile(
+                            resultSet.getString("mobileId"),
+                            resultSet.getString("description"),
+                            resultSet.getDouble("price"),
+                            resultSet.getString("mobileName"),
+                            resultSet.getInt("yearOfProduction"),
+                            resultSet.getInt("quantity"),
+                            resultSet.getBoolean("notSale")
+                    );
+
+                    mobiles.add(mobile);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return mobiles;
+    }
 
     public Mobile getMobileById(String mobileId) {
         Mobile mobile = null;
